@@ -5,23 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="../vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
       <div id="app">
-        {{ info }} {{info2}} {{info3}}
+        <input type="text" placeholder="enter your name" v-model="username">
+        <p>Hi! {{username}}</p>
       </div>
     <script>
         let vm=new Vue({
             el:"#app",
             data:{
-                info1:12,
-                info2:"this is a div",
-                info3:(new Date().getTime())
+                username:"",
             }
         })
     </script>
 </body>
 </html>
-git remote add origin https://github.com/aniyagnik/learningVue.git

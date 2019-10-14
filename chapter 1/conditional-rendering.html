@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="../vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
       <div id="app">
         <button @click="incrementCount">click</button>
         <span>{{count}}</span>
-        <div v-if="isEven">EVEN</div>
-        <div v-else>ODD</div>
-        <div v-show="isEven">NUMBER IS EVEN</div>
+        <div v-if="isEven">EVEN</div>  <!--if false then element is not created-->
+        <div v-else>ODD</div>   
+        <div v-show="isEven">NUMBER IS EVEN</div> <!--if isEven is false display:none else display:block(default)-->
         <div v-show="!isEven">NUMBER IS ODD</div>        
       </div>
     <script>

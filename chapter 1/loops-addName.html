@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+      <div id="app">
+         <input type="text" placeholder="enter new name" v-model="inputName">
+         <input type="text" placeholder="enter priority" v-model="inputPriority">
+         <button @click="insertName">add!!</button> 
+        <li v-for="doc in array">{{doc.name}}</li>
+    </div>
+    <script>
+        let vm=new Vue({
+            el:"#app",
+            data:{
+                array:[
+                    {
+                        name:'anirudh',
+                        priority:1
+                    },
+                    {
+                        name:'yagnik',
+                        priority:3
+                    },{
+                        name:'shankar',
+                        priority:2
+                    }
+                ]
+            },
+            methods : {
+                insertName(){
+                    const doc={
+                        name:this.inputName,
+                        priority:this.inputPriority
+                    }
+                    this.array.push(doc)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

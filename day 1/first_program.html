@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+      <div id="app">
+        {{ info1 }} {{info2}} {{info3}}
+      </div>
+    <script>
+        let vm=new Vue({
+            el:"#app",
+            data:{
+                info1:12,
+                info2:"this is a div",
+                info3:(new Date().getTime())
+            }
+        })
+    </script>
+</body>
+</html>
+git remote add origin https://github.com/aniyagnik/learningVue.git

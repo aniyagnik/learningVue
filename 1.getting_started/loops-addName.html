@@ -12,7 +12,11 @@
          <input type="text" placeholder="enter new name" v-model="inputName">
          <input type="text" placeholder="enter priority" v-model="inputPriority">
          <button @click="insertName">add!!</button> 
-        <li v-for="doc in array">{{doc.name}}</li>
+        <li v-for="(doc,i) in array">
+            {{doc.name}}
+            <button @click="array.splice(i,1)">delete!</button>
+        </li>
+        
     </div>
     <script>
         let vm=new Vue({

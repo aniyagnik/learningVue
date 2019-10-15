@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+         fun 1 {{value | capitalize}}
+    </div>
+    <div id="app2">
+        fun 2 {!value!}
+    </div>
+</body>
+<script>
+    /*
+    Vue comes with no built-in filters except for an equivalent of the JSON filter. 
+    This filter was very useful and, while its considered not really orthodox to debug with it,
+    sometimes it just makes your life easier. Now we have it straight
+    away without even writing it.
+    */
+     Vue.filter('capitalize', function (string) {
+            var [first, ...tail] = string
+            return first.toUpperCase() + tail.join('')
+        })
+     let vm1=new Vue({
+        el:"#app1",
+        data:{
+            value:"anirudh yagnik"
+        }
+    })
+
+    let vm2=new Vue({
+        el:"#app2",
+        data:{
+            value:"deepawali"
+        },
+        delimiters: ['{!','!}']
+    })
+</script>
+</html>
+
+<!--
+    Deprecation of array filters
+If you had a lot of filtered v-for lists, I have bad news for you. Even if in the wild the most common use for
+filters was with v-for, the community chose to remove this feature. The reason is mainly because having a
+lot of filters, often piped together, was hard to reason about and thus to maintain.
+The new recommended way to filter a list is with a computed property. Luckily for you, we have an entire
+recipe on how to do that. See the recipe Filtering a list with a computed property in the next chapter.
+-->

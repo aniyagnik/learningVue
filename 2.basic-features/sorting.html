@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .ascending:after {
+            content: "🔼"
+        }
+        .descending:after {
+            content: "🔽"
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/accounting.js/0.3.2/accounting.js"></script>
+</head>
+<body>
+    <div id="app">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>breed</th>
+              <th v-bind:class="order === 1 ? 'descending' : 'ascending'" @click="sort">powerLevel</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr v-for="character in charactersByPower">
+                <td>{{character.name}}</td>
+                <td>{{character.breed}}</td>
+                <td>{{character.powerLevel}} units</td>
+              </tr>
+          </tbody>
+        </table>
+    </div>
+</body>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        characters: [
+            {name: 'goku', breed: 'saiyan', powerLevel: 8000},
+            {name: 'gohan', breed: 'half-saiyan', powerLevel: 1500},
+            {name: 'vegita', breed: 'saiyan', powerLevel: 18000},
+            {name: 'piccolo', breed: 'namekian', powerLevel: 2000}
+        ],
+        order: 1 ,// means ascending
+    },
+    methods:{
+        sort(){
+            this.order=this.order*(-1);
+        }
+    },
+    computed: {
+        charactersByPower () {
+            return this.characters.sort((c1, c2) => (c2.powerLevel - c1.powerLevel)*this.order);
+        }
+    },
+})
+
+/*
+How it works...
+The computed property we just created, charactersByPower, will return an array that will be a sorted clone of
+this.characters. As always with computed properties, the result will be cached (or memorized); every time we
+need the result, if the original list is not changed, the function will not be called and the cached result will
+be returned.
+The sort function accepts two parameters: two members of the list. The return value must be a positive
+number if the second member is after the first or a negative number if the opposite is true.
+The order we obtain with c2.powerLevel - c1.powerLevel is descending; if we want an ascending order, we
+have to commute the two operands or multiply them by -1.
+*/
+</script>
+</html>

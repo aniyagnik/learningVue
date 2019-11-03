@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="name"/>
+        <input type="text" id="surname" value='Yagnik'/>
+        <button @click="saveSurname">Save Surname</button>
+        <output>{{computedFullName}}</output>
+    </div>
+    <script>
+        let surname = 'Yagnik'
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'Anirudh'
+            },
+            computed: {
+                computedFullName () {
+                    return this.name + ' ' + surname
+                }
+            },
+            methods: {
+                saveSurname () {
+                    surname = this.$el.querySelector('#surname').value
+                }
+            }
+        })
+    </script>
+        <!--
+            In the following text, by the word dependencies I refer to variables that are reactive and are used inside a
+computed property. When a dependency is changed, the computed property is calculated.
+Computed properties are not meant for memorizing data, but you can define a setter in case it makes more
+sense to set a value directly instead of indirectly manipulating it through its dependencies. Moreover, if a
+computed property returns an object, it will be a new object every time, not a modified version of the
+previous one. Lastly, the computed property will not be called if all the dependencies haven't changed.
+          -->
+</body>
+</html>
+
+<!-- 
+    Caching computed properties
+While functions inside the methods option are executed every time we call them, functions in computed
+are cached based on the dependencies, which in turn are defined by everything reactive found inside the
+function.
+In the next recipe, composing computed properties is explored, but you can easily imagine how you
+can have very heavy calculations on a computed property:
+computed: {
+    trillionthDigitOfPi () {
+        // hours of computations and terabytes later...
+        return 2
+    }
+}
+Then, you can use the same property over and over, without the need for re-evaluation at every usage:
+    unnecessarilyComplexDoubler (input) {
+        return input * this.trillionthDigitOfPi
+    }
+Every time we call this function, we just fetch the cached value of trillionthDigitOfPi; there is no need for
+calculations again.
+ -->

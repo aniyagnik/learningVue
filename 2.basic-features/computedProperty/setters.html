@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <label>Legs: <input v-model="legCount" type="range"></label><br>
+        <label>Tops: <input @input="update" :value="tableCount"></label><br>
+        <output>
+           We are going to build {{legCount}} legs
+            and assembly {{tableCount}} tables.
+        </output>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+              legCount: 0
+            },
+            computed: {
+                tableCount: {
+                    get () {
+                        return this.legCount / 4
+                    },
+                    set (newValue) {
+                        this.legCount = newValue * 4
+                    }
+                }
+            },
+            update (e) {
+
+                 this.tableCount = typeof e.target.value!="undefined" ? e.target.value : 0
+            }
+        })
+
+ 
+    </script>
+</body>
+</html>

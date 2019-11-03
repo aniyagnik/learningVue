@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--<ul>
+            <li v-for="exp in experiments">
+                {{exp.name}} === {{exp.cost}} m $
+            </li>
+        </ul>-->
+        <input type="text" placeholder="enter subject" v-model="sub">   
+        <ul>
+                <li v-for="exp in nonsub">
+                    {{exp.name}}--------{{exp.field}}---------{{exp.cost}} m $
+                </li>
+            </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                sub:"",
+                experiments: [
+                    {name: 'RHIC Ion Collider', cost: 650, field: 'Physics'},
+                    {name: 'Neptune Undersea Observatory', cost: 100, field: 'Biology'},
+                    {name: 'Violinist in the Metro', cost: 3, field: 'Psychology'},
+                    {name: 'Large Hadron Collider', cost: 7700, field: 'Physics'},
+                    {name: 'DIY Particle Detector', cost: 0, field: 'Physics'}
+                ]
+            },
+            computed: {
+                nonsub () {
+                    return this.experiments.filter(exp => exp.field !== this.sub)
+                },
+            }
+        })
+    </script>
+</body>
+</html>
